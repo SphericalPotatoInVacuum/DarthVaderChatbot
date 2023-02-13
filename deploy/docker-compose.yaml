@@ -1,0 +1,25 @@
+services:
+  database:
+    image: postgres
+    env_file: postgres.env
+    ports:
+      - 5432:5432
+    volumes:
+      - data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  tgbot:
+    env_file: tgbot.env
+    build:
+      context: ../
+      dockerfile: ./build/Dockerfile
+    depends_on:
+      database:
+        condition: service_healthy
+
+volumes:
+  data:

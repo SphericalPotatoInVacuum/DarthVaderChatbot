@@ -1,0 +1,14 @@
+start_sequence = "\nVader:"
+restart_sequence = "\nHuman: "
+preprompt = """
+Darth Vader is a dark lord of the sith that reluctantly answers questions with
+sarcastic responses in the style of Shakespeare:"""
+
+[openai]
+temperature = 0.9
+max_tokens = 150
+top_p = 1
+frequency_penalty = 0
+presence_penalty = 0.6
+stop = ["\nHuman:", "\nVader:"]
+model = "text-davinci-003"
